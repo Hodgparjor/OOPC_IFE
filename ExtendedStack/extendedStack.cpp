@@ -1,5 +1,6 @@
 #include "extendedStack.h"
 #include <iostream>
+#include <cstring>
 using namespace std;
 
 Stack::Stack()
@@ -16,16 +17,22 @@ Stack::~Stack()
 
 Stack::Stack(const Stack& s1)
 {
-	this->data = s1.data;
 	this->size = s1.size;
 	this->top = s1.top;
+	this->data = (int*)malloc(this->size * sizeof(int));
+	memcpy(this->data, s1.data, this->size * sizeof(int));
 }
 
 Stack& Stack::operator=(const Stack& s1)
 {
-	data = s1.data;
-	size = s1.size;
-	top = s1.top;
+	if (&s1 == this) {
+		return *this;
+	}
+	free(this->data);
+	this->size = s1.size;
+	this->top = s1.top;
+	this->data = (int*)malloc(this->size * sizeof(int));
+	memcpy(this->data, s1.data, this->size * sizeof(int));
 	return *this;
 }
 
