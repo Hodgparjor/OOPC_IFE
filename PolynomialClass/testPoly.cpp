@@ -34,7 +34,7 @@ void display(const Poly& p1, const Poly& p2) {
 void test(const Poly& p1, const Poly& p2) {
 	testAddition(p1, p2);	
 	testSubtraction(p1, p2);	
-// 	testMultiplication(p1, p2);
+	testMultiplication(p1, p2);
 	testNegation(p1, p2);
 	testValue(p1, p2);
 }
@@ -57,11 +57,11 @@ void testSubtraction(const Poly& p1, const Poly& p2) {
 	cout << "Difference of 7.2 and polynomial p1: " << 7.2 - p1 << endl;
 }
 
-// void testMultiplication(const Poly& p1, const Poly& p2) {
-// 	cout << "Product of polynomials p1 and p2: " << p1 * p2 << endl;
-// 	cout << "2 multiplied by polynomial p1: " << 2 * p1 << endl;
-// 	cout << "Polynomial p1 multiplied by 2: " << p1 * 2 << endl;	
-// }
+void testMultiplication(const Poly& p1, const Poly& p2) {
+	cout << "Product of polynomials p1 and p2: " << p1 * p2 << endl;
+	cout << "2 multiplied by polynomial p1: " << 2 * p1 << endl;
+	cout << "Polynomial p1 multiplied by 2: " << p1 * 2 << endl;	
+}
 
 void testNegation(const Poly& p1, const Poly& p2) {
 	cout << "Negation of polynomial p1: " << -p1 << endl;

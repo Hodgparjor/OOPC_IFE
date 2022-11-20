@@ -112,12 +112,29 @@ Poly Poly::operator-() const {
 }
 
 double Poly::operator()(double xval) const {
-    double result;
+    double result = 0;
     list<PolyElement>::const_iterator it;
     for(it = this->elements.begin(); it != this->elements.end(); ++it) {
         result += (pow(xval, (*it).degree) * (*it).coefficent);
     }
     return result;
+}
+
+Poly operator*(const Poly& p1, const Poly& p2) {
+    Poly resultPoly;
+    list<PolyElement>::const_iterator it2;
+    list<PolyElement>::const_iterator it1;
+
+    for(it2 = p2.elements.begin(); it2!= p2.elements.end(); ++it2) {
+        Poly tmpPoly;
+        for(it1 = p1.elements.begin(); it1!= p1.elements.end(); ++it1) {
+            int newDegree = (*it1).degree + (*it2).degree;
+            double newCoefficent = (*it1).coefficent * (*it2).coefficent;
+            tmpPoly[newDegree] = newCoefficent;
+        }
+        resultPoly = resultPoly + tmpPoly;
+    }
+    return resultPoly;
 }
 // --- OUTPUT STREAM ---
 
@@ -170,6 +187,14 @@ string outputElement(const PolyElement& element, string sign) {
     return output;
 }
 
+string getSign(double coefficent) {
+    if(coefficent >= 0) {
+        return "+";
+    } else {
+        return "-";
+    }
+}
+
 ostream& operator<<(ostream& out, const Poly& poly){
     list<PolyElement>::iterator it;
     list<PolyElement> outputList = getListToPrint(poly);
@@ -178,12 +203,8 @@ ostream& operator<<(ostream& out, const Poly& poly){
     }
     string sign;
     for(it = outputList.begin(); it != outputList.end(); ++it) {
-        sign = '+';
         if((*it).coefficent != 0) {
-
-            if((*it).coefficent < 0) {
-                sign = '-';
-            }
+            sign = getSign((*it).coefficent);
             if((&(*it) == &(outputList.front()))) {
                 out << outputFirstElement((*it), sign);
             } else {

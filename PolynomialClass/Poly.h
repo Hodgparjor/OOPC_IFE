@@ -32,3 +32,4 @@ class Poly {
 string BaseOutputElement(const PolyElement& element);
 string outputFirstElement(const PolyElement& element, string sign);
 string outputElement(const PolyElement& element, string sign);
+string getSign(double coefficent);
