@@ -41,7 +41,7 @@ void test(const Poly& p1, const Poly& p2) {
 
 void testAddition(const Poly& p1, const Poly& p2) {
 	Poly p = p1 + p2;
-	cout << "Sum of polynomials p1 and p2: " << p << endl;
+	cout << "\nSum of polynomials p1 and p2: " << p << endl;
 	
 	p = p1 + 3.1;
 	cout << "Sum of polynomial p1 and 3.1: " << p << endl;
@@ -51,24 +51,24 @@ void testAddition(const Poly& p1, const Poly& p2) {
 }
 
 void testSubtraction(const Poly& p1, const Poly& p2) {
-	cout << "Difference of polynomials p1 and p2: " << p1 - p2 << endl;
+	cout << "\nDifference of polynomials p1 and p2: " << p1 - p2 << endl;
 	cout << "Difference of polynomials p1 and p1: " << p1 - p1 << endl;	// Should display 0 (not 0x^3 + 0x + 0)
 	cout << "Difference of polynomial p1 and 7.2: " << p1 - 7.2 << endl;
 	cout << "Difference of 7.2 and polynomial p1: " << 7.2 - p1 << endl;
 }
 
 void testMultiplication(const Poly& p1, const Poly& p2) {
-	cout << "Product of polynomials p1 and p2: " << p1 * p2 << endl;
+	cout << "\nProduct of polynomials p1 and p2: " << p1 * p2 << endl;
 	cout << "2 multiplied by polynomial p1: " << 2 * p1 << endl;
 	cout << "Polynomial p1 multiplied by 2: " << p1 * 2 << endl;	
 }
 
 void testNegation(const Poly& p1, const Poly& p2) {
-	cout << "Negation of polynomial p1: " << -p1 << endl;
+	cout << "\nNegation of polynomial p1: " << -p1 << endl;
 	cout << "Negation of polynomial p2: " << -p2 << endl;
 }
 
 void testValue(const Poly& p1, const Poly& p2) {
-	cout << "Value of polynomial p1 at point 1.5: " << p1(2) << endl;
+	cout << "\nValue of polynomial p1 at point 1.5: " << p1(2) << endl;
 	cout << "Value of polynomial p2 at point 2.3: " << p2(2.3) << endl;
 }
