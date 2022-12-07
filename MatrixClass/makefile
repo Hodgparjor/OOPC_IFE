@@ -1,11 +1,11 @@
 # List your *.h files (if you do not have them in your project then leave the variable "headers" empty):
-headers = Poly.h
+headers = matrix.h
 
 # List your *.cpp files:
-sources = Poly.cpp testPoly.cpp
+sources = matrix.cpp testMatrix.cpp
 
 # Specify name of your program:
-executable = testPoly
+executable = testMatrix
 
 $(executable): $(headers) $(sources)
 	g++ -g -Wall -pedantic $(sources) -o $(executable)
