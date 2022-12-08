@@ -7,6 +7,7 @@ void testCompoundSubstraction();
 void testCompoundMultiplication();
 void testCompoundOperators();
 void testAddition(const Matrix& m1, const Matrix& m2);
+void testBracketsOperator();
 void testSubstraction(const Matrix& m1, const Matrix& m2);
 void testMultiplication(const Matrix& m1, const Matrix& m2);
 void testRegularOperators();
@@ -18,6 +19,7 @@ void testInvalidDataInFileException();
 void testReferenceCounting();
 
 int main() {
+	testBracketsOperator();
     testCompoundOperators();
     testRegularOperators();
     testExceptions();
@@ -36,6 +38,7 @@ void testCompoundAddition() {
     m2(0, 1) = 4;
     m2(1, 0) = 6;
     m2(1, 1) = 8;
+    
     Matrix properResult(2, 2);
     properResult(0, 0) = 3;
     properResult(0, 1) = 7;
@@ -48,6 +51,17 @@ void testCompoundAddition() {
     else {
         cout << "PASSED" << endl;
     }
+}
+
+void testBracketsOperator() {
+	Matrix m1("m1.txt");
+	Matrix m2("m2.txt");
+	cout << "m1:\n" << m1 << endl;
+	cout << "m2:\n" << m2 << endl;
+	m1(0, 0) = m2(1, 1);
+	Matrix properResult(m1);
+    properResult(0, 0) = 8;
+	cout << "Modified m1:\n" << m1 << endl;
 }
 
 void testCompoundSubstraction() {

@@ -42,8 +42,6 @@ class Matrix {
     Matrix(string fileName);
     Matrix(const Matrix& matrix);
     ~Matrix();
-    size_t getNumberOfRows() const;
-    size_t getNumberOfColumns() const;
     size_t getNumberOfReferences() const;
     
     Matrix& operator=(const Matrix& matrix);
@@ -63,6 +61,8 @@ class Matrix {
   private:
     struct MatrixData;
     MatrixData* data;
+    size_t getNumberOfRows() const;
+    size_t getNumberOfColumns() const;
     double reading(size_t rowNumber, size_t columnNumber) const;
     void writing(size_t rowNumber, size_t columnNumber, double newValue);
 };
@@ -83,6 +83,7 @@ class MatrixReferenceHandler {
     MatrixReferenceHandler(Matrix* matrix, size_t row, size_t column);
     operator double() const;
     void operator=(double number);
+    void operator=(const MatrixReferenceHandler& matrixElement);
     Matrix* matrix;
     size_t row;
     size_t column;
