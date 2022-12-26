@@ -17,4 +17,5 @@ template<class T> class list {
     int getCurrentData();
     void advance();
     bool moreData();
+    T bsearch();
 };

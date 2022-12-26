@@ -24,7 +24,7 @@ int main() {
 	database = newDatabase;												// Update original database
 
 	cout << "Database after the assignment:" << endl << database << endl;
-};
+}
 
 void addEmployees(Database& database) {
 	database.add(761028073, Employee("Jan Kowalski", "salesman", 28)); 	// Add first employee: name: Jan Kowalski, position: salseman, age: 28,
