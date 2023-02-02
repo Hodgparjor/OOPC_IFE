@@ -26,8 +26,8 @@ class Pacman : public MovingObject, public QGraphicsPixmapItem{
         int speed = REGULAR_SPEED;
         void move(int currentDirection);
         void keyPressEvent(QKeyEvent *pressed);
-        void determineCollisionWithObjects();
-        QPixmap pacmanImage[4];
+        void detectCollisionWithObjects();
+        QPixmap pacmanImg[4];
         QTimer* boostTimer;
         void finishDelay();
         void pacmanRevivalDelay();
@@ -37,7 +37,7 @@ class Pacman : public MovingObject, public QGraphicsPixmapItem{
         Pacman(int xPos, int yPos, QGraphicsItem* parent = 0);
         QTimer* moveTimer;
     public slots:
-        void makeAMove();
+        void makeMove();
         void offBoost();
         void finishGameWon();
         void finishGameLost();

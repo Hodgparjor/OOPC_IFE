@@ -8,14 +8,14 @@
 #define MARGIN(size) ((CELL_SIZE - size) / 2)
 #define REGULAR_SPEED 1
 #define BOOST_SPEED 2* REGULAR_SPEED
-#define FRAMETIME 10
-#define BOOST_TIME 10000
+#define FRAMETIME 11
+#define BOOST_TIME 8000
 #define DEATH_TIME 2000
 #define COIN_POINTS 10
-#define SPECIAL_COIN_POINTS 100
-#define GHOST_POINTS 200
+#define SPECIAL_COIN_POINTS 50
+#define GHOST_POINTS 150
 #define MAX_DISTANCE numeric_limits<double>::max();
-#define CUT_OFF 5
+#define CUT_OFF 4
 #define EXIT_SCREEN_TIME 3
 #define REVIVAL_TIME 1
 #define PACMAN_START_X 14

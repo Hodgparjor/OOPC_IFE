@@ -20,16 +20,13 @@ Game::Game(QWidget* parent) : QGraphicsView(parent)
 	addClyde();
 	addInky();
 	addPinky();
-	addLives(livesLeft);
+	addLives();
 }
 
 int Game::generateMap(){
 	int coinsLeft = 0;
 	for (int x = 0; x < MAP_WIDTH; x++) {
 		for (int y = 0; y < MAP_HEIGHT; y++) {
-			if (MapTemplate[y][x] == WALL) {
-				//scene->addItem(new Wall(x, y));
-			}
 			if(MapTemplate[y][x] == SPECIAL_POINT) {
 				scene -> addItem(new Coin(x, y, true));
 				coinsLeft++;
@@ -59,11 +56,11 @@ void Game::addScoreCounter(int coinsLeft, int livesLeft){
 }
 
 void Game::addBlinky(){
-	ghosts[0] = new Blinky(12, 14, "./assets/redghost.png", pacman -> moveTimer);
+	ghosts[0] = new Blinky(12, 14, "./assets/redghost.png", pacman->moveTimer);
 	scene -> addItem(ghosts[0]);
 	connect(pacman, SIGNAL(startBoost()), ghosts[0], SLOT(makeVulnerable()));
 	connect(pacman, SIGNAL(endBoost()), ghosts[0], SLOT(makeRegular()));
-	connect(pacman, SIGNAL(moved(int, int)), ghosts[0], SLOT(updatePacmanCoords(int, int)));
+	connect(pacman, SIGNAL(moved(int, int)), ghosts[0], SLOT(updatePacmanPos(int, int)));
 	ghosts[0] -> setNewDirection(UP);
 }
 
@@ -80,7 +77,7 @@ void Game::addInky(){
 	scene -> addItem(ghosts[2]);
 	connect(pacman, SIGNAL(startBoost()), ghosts[2], SLOT(makeVulnerable()));
 	connect(pacman, SIGNAL(endBoost()), ghosts[2], SLOT(makeRegular()));
-	connect(pacman, SIGNAL(moved(int, int)), ghosts[2], SLOT(updatePacmanCoords(int, int)));
+	connect(pacman, SIGNAL(moved(int, int)), ghosts[2], SLOT(updatePacmanPos(int, int)));
 	ghosts[2] -> setNewDirection(RIGHT);
 }
 
@@ -98,7 +95,7 @@ void Game::addPinky(){
 	ghosts[3] -> setNewDirection(DOWN);
 }
 
-void Game::addLives(int livesLeft) {
+void Game::addLives() {
 	Life* life1 = new Life(1, "assets/pacmanLeft.png");
 	Life* life2 = new Life(2, "assets/pacmanLeft.png");
 	Life* life3 = new Life(3, "assets/pacmanLeft.png");

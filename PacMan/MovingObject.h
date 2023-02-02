@@ -9,10 +9,10 @@ class MovingObject : public QObject {
     protected:
     int xPos;
     int yPos;
-    int currentDirection = LEFT;
+    int currentDirection = RIGHT;
     int nextDirection = NONE;
     bool isMovePossible(int currentDirection);
     virtual void move(int currentDirection) = 0;
     public slots:
-    virtual void makeAMove() = 0;
+    virtual void makeMove() = 0;
 };

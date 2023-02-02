@@ -7,16 +7,15 @@
 
 #include "Globals.h"
 #include "Coin.h"
-#include "Wall.h"
 #include "Pacman.h"
 #include "Map.h"
-#include "ScoreAndLivesCounter.h"
 #include "Ghost.h"
 #include "Clyde.h"
 #include "Blinky.h"
 #include "Inky.h"
 #include "Pinky.h"
 #include "Lives.h"
+#include "ScoreAndLivesCounter.h"
 
 using namespace std;
 
@@ -36,5 +35,5 @@ class Game : public QGraphicsView{
     void addPinky();
     void addClyde();
     void drawMap();
-    void addLives(int livesLeft);
+    void addLives();
 };

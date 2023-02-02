@@ -5,15 +5,15 @@ Pacman::Pacman(int xPos, int yPos, QGraphicsItem* parent) : QGraphicsPixmapItem(
     this -> yPos = yPos;
     currentDirection = LEFT;
     nextDirection = NONE;
-    pacmanImage[UP] = QPixmap("./assets/pacmanUp.png").scaled(CELL_SIZE * 1.1, CELL_SIZE * 1.1);
-    pacmanImage[DOWN] = QPixmap("./assets/pacmanDown.png").scaled(CELL_SIZE * 1.1, CELL_SIZE * 1.1);
-    pacmanImage[RIGHT] = QPixmap("./assets/pacmanRight.png").scaled(CELL_SIZE * 1.1, CELL_SIZE * 1.1);
-    pacmanImage[LEFT] = QPixmap("./assets/pacmanLeft.png").scaled(CELL_SIZE * 1.1, CELL_SIZE * 1.1);
-    setPixmap(pacmanImage[LEFT]);
+    pacmanImg[UP] = QPixmap("./assets/pacmanUp.png").scaled(CELL_SIZE * 1.1, CELL_SIZE * 1.1);
+    pacmanImg[DOWN] = QPixmap("./assets/pacmanDown.png").scaled(CELL_SIZE * 1.1, CELL_SIZE * 1.1);
+    pacmanImg[RIGHT] = QPixmap("./assets/pacmanRight.png").scaled(CELL_SIZE * 1.1, CELL_SIZE * 1.1);
+    pacmanImg[LEFT] = QPixmap("./assets/pacmanLeft.png").scaled(CELL_SIZE * 1.1, CELL_SIZE * 1.1);
+    setPixmap(pacmanImg[LEFT]);
     setPos(xPos * CELL_SIZE, yPos * CELL_SIZE);
 
     moveTimer = new QTimer();
-    connect(moveTimer, SIGNAL(timeout()), this, SLOT(makeAMove()));
+    connect(moveTimer, SIGNAL(timeout()), this, SLOT(makeMove()));
     boostTimer =  new QTimer();
     boostTimer->setInterval(BOOST_TIME);
     boostTimer->setSingleShot(true);
@@ -25,20 +25,16 @@ void Pacman::keyPressEvent(QKeyEvent* pressed){
     switch (pressed -> key())
     {
         case Qt::Key_Up:
-        case Qt::Key_W:
-            this -> nextDirection = UP;
+            this->nextDirection = UP;
             break;
         case Qt::Key_Left:
-        case Qt::Key_A:
-            this -> nextDirection = LEFT;
+            this->nextDirection = LEFT;
             break;
         case Qt::Key_Down:
-        case Qt::Key_S:
-            this -> nextDirection = DOWN;
+            this->nextDirection = DOWN;
             break;
         case Qt::Key_Right:
-        case Qt::Key_D:
-            this -> nextDirection = RIGHT;
+            this->nextDirection = RIGHT;
             break;
         case Qt::Key_Escape:
             QCoreApplication::quit();
@@ -55,32 +51,32 @@ void Pacman::move(int currentDirection) {
     switch(currentDirection){
         case UP:
             moveBy(0, -speed);
-            if(y() == (this -> yPos - 1) * CELL_SIZE) {
-                this -> yPos--;
-                emit moved(xPos, yPos);
-            }
-            break;
-
-        case RIGHT:
-            moveBy(speed, 0);
-            if(x() == (this -> xPos + 1) * CELL_SIZE) {
-                this -> xPos++;
+            if(y() == (this->yPos - 1) * CELL_SIZE) {
+                this->yPos--;
                 emit moved(xPos, yPos);
             }
             break;
 
         case DOWN:
             moveBy(0, speed);
-            if(y() == (this -> yPos + 1) * CELL_SIZE){ 
-                this -> yPos++;
+            if(y() == (this->yPos + 1) * CELL_SIZE){ 
+                this->yPos++;
+                emit moved(xPos, yPos);
+            }
+            break;
+
+        case RIGHT:
+            moveBy(speed, 0);
+            if(x() == (this->xPos + 1) * CELL_SIZE) {
+                this->xPos++;
                 emit moved(xPos, yPos);
             }
             break;
 
         case LEFT:
             moveBy(-speed, 0);
-            if(x() == (this -> xPos - 1) * CELL_SIZE){
-                this -> xPos--;
+            if(x() == (this->xPos - 1) * CELL_SIZE){
+                this->xPos--;
                 emit moved(xPos, yPos);
             }
             break;
@@ -90,18 +86,18 @@ void Pacman::move(int currentDirection) {
     }
 }
 
-void Pacman::makeAMove() {
-    this -> determineCollisionWithObjects();
-    if(isMovePossible(this -> nextDirection) && (int) x() % CELL_SIZE == 0 && (int) y()% CELL_SIZE == 0){
-        this -> currentDirection = this -> nextDirection;
+void Pacman::makeMove() {
+    this->detectCollisionWithObjects();
+    if(isMovePossible(this->nextDirection) && (int) x() % CELL_SIZE == 0 && (int) y()% CELL_SIZE == 0){
+        this->currentDirection = this->nextDirection;
     }
-    if(isMovePossible(this -> currentDirection)){
-        setPixmap(QPixmap(pacmanImage[this->currentDirection]));
-        move(this -> currentDirection);
+    if(isMovePossible(this->currentDirection)){
+        setPixmap(QPixmap(pacmanImg[this->currentDirection]));
+        move(this->currentDirection);
     }
 }
 
-void Pacman::determineCollisionWithObjects() {
+void Pacman::detectCollisionWithObjects() {
     QList<QGraphicsItem*> objects = collidingItems();
     for (auto object : objects){
         if(dynamic_cast<Coin*>(object) != nullptr){
@@ -113,7 +109,7 @@ void Pacman::determineCollisionWithObjects() {
 }
 
 void Pacman::offBoost() {
-    this -> speed = REGULAR_SPEED;
+    this->speed = REGULAR_SPEED;
     emit endBoost();
 }
 
@@ -200,7 +196,7 @@ void Pacman::handleEnemyCollision(QGraphicsItem* object){
             this->xPos = PACMAN_START_X;
             this->yPos = PACMAN_START_Y;
             this->currentDirection = LEFT;
-            setPixmap(QPixmap(pacmanImage[LEFT]));
+            setPixmap(QPixmap(pacmanImg[LEFT]));
             setPos(xPos * CELL_SIZE, yPos * CELL_SIZE);
             pacmanRevivalDelay();
         }

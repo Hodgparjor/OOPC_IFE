@@ -14,14 +14,14 @@ Ghost::Ghost(int xPos, int yPos, QString imagePath, QTimer* pacmanTimer, QGraphi
     connect(deathTimer, SIGNAL(timeout()), SLOT(releaseFromBox()));
     nextDirection = chooseRandomDirection();
     nextDirection = NONE;
-    connect(pacmanTimer, SIGNAL(timeout()), this, SLOT(makeAMove()));
+    connect(pacmanTimer, SIGNAL(timeout()), this, SLOT(makeMove()));
 }
 
 vector<int> Ghost::possibleMoves(){
     vector<int> possibleMoves;
     for(int i =0; i <= 3; i++){
-        if(isMovePossible(i)){
-            if((currentDirection + 2)% 4 != i){
+        if(isMovePossible(i)) {
+            if((currentDirection + 2) % 4 != i){
                 possibleMoves.push_back(i);
             }
         }
@@ -41,28 +41,28 @@ void Ghost::move(int currentDirection){
         case UP:
             moveBy(0, -speed);
             if(y() == (this->yPos - 1) * CELL_SIZE) {
-                this -> yPos--;
+                this->yPos--;
                 canChangeDirection = true;
             }
             break;
         case RIGHT:
             moveBy(speed, 0);
             if(x() == (this->xPos + 1) * CELL_SIZE) {
-                this -> xPos++;
+                this->xPos++;
                 canChangeDirection = true;
             }
             break;
         case DOWN:
             moveBy(0, speed);
             if(y() == (this->yPos + 1) * CELL_SIZE){ 
-                this -> yPos++;
+                this->yPos++;
                 canChangeDirection = true;
             }
             break;
         case LEFT:
             moveBy(-speed, 0);
-            if(x() == (this -> xPos - 1) * CELL_SIZE){
-                this -> xPos--;
+            if(x() == (this->xPos - 1) * CELL_SIZE){
+                this->xPos--;
                 canChangeDirection = true;
             }
             break;  
@@ -74,8 +74,8 @@ void Ghost::move(int currentDirection){
     }
 }
 
-void Ghost::makeAMove(){
-    if(vulnerable && isMovePossible(this -> currentDirection)){
+void Ghost::makeMove(){
+    if(vulnerable && isMovePossible(this->currentDirection)){
         move(this->currentDirection);
         if((int) x() % CELL_SIZE == 0 && (int) y() % CELL_SIZE == 0){
             this->currentDirection = chooseRandomDirection();
@@ -85,8 +85,8 @@ void Ghost::makeAMove(){
         this->currentDirection = this->nextDirection;
         this->nextDirection = NONE;
     }
-    if(isMovePossible(this -> currentDirection)){
-        move(this -> currentDirection);
+    if(isMovePossible(this->currentDirection)){
+        move(this->currentDirection);
     }
 }
 
@@ -97,7 +97,7 @@ void Ghost::makeVulnerable() {
 
 void Ghost::makeRegular() {
     this->vulnerable = false;
-    setPixmap(QPixmap(this -> imagePath).scaled(CELL_SIZE * 1.1, CELL_SIZE * 1.1));
+    setPixmap(QPixmap(this->imagePath).scaled(CELL_SIZE * 1.1, CELL_SIZE * 1.1));
 }
 
 bool Ghost::isLive() {
@@ -107,15 +107,6 @@ bool Ghost::isLive() {
 bool Ghost::isVulnerable() {
     return this->vulnerable;
 }
-
-// void Ghost::setLive() {
-//     this->live = true;
-//     setPos(this->xStart * CELL_SIZE, this->yStart * CELL_SIZE);
-//     this->xPos = this->xStart;
-//     this->yPos = this->yStart;
-//     this->currentDirection = chooseRandomDirection();
-//     show();
-// }
 
 void Ghost::moveToBox() {
     this->xPos = this->xStart;
@@ -142,7 +133,7 @@ double Ghost::distance(int targetX, int targetY, int currentX, int currentY){
     return sqrt(pow(targetX - currentX, 2) + pow(targetY - currentY, 2));
 }
 
-void Ghost::updatePacmanCoords(int pacmanXCoord, int pacmanYCoord){
+void Ghost::updatePacmanPos(int pacmanXCoord, int pacmanYCoord){
     this->pacmanXCoord = pacmanXCoord;
     this->pacmanYCoord = pacmanYCoord;
 }
@@ -156,19 +147,19 @@ void Ghost::setVulnerable(bool status){
 }
 
 void Ghost::setAlive(bool status){
-    this -> live = status;
+    this->live = status;
 }
 
 void Ghost::setNewDirection(int currentDirection){
-    this -> currentDirection = currentDirection;
+    this->currentDirection = currentDirection;
 }
 
 int Ghost::getXCoord(){
-    return this -> xPos;
+    return this->xPos;
 }
 
 int Ghost::getYCoord(){
-    return this -> xPos;
+    return this->xPos;
 }
 
 int Ghost::chooseBestDirection(int targetX, int targetY, int currX, int currY){
@@ -206,7 +197,7 @@ int Ghost::minDistanceDirection(double upDirectionDistance, double leftDirection
         return DOWN;
 
     }else if(rightDirectionDistance == minDistance){
-       return RIGHT;
+        return RIGHT;
     }
     return NONE;
 }
@@ -245,7 +236,7 @@ int Ghost::maxDistanceDirection(double upDirectionDistance, double leftDirection
         return DOWN;
 
     }else if(rightDirectionDistance == maxDistance){
-       return RIGHT;
+        return RIGHT;
     }
     return NONE;
 }

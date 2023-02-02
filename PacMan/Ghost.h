@@ -48,7 +48,7 @@ class Ghost : public MovingObject, public QGraphicsPixmapItem {
     public slots:
         void makeVulnerable();
         void makeRegular();
-        void makeAMove();
+        void makeMove();
         void releaseFromBox();
-        void updatePacmanCoords(int pacmanXCoord, int pacmanYCoord);
+        void updatePacmanPos(int pacmanXCoord, int pacmanYCoord);
 };
