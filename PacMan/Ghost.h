@@ -38,8 +38,9 @@ class Ghost : public MovingObject, public QGraphicsPixmapItem {
         int chooseBestDirection(int targetX, int targetY, int currX, int currY);
         int chooseWorstDirection(int targetX, int targetY, int currX, int currY);
         int chooseRandomDirection();
-        int pacmanXCoord = PACMAN_START_X;
-        int pacmanYCoord = PACMAN_START_Y;
+        int pacmanXPos = PACMAN_START_X;
+        int pacmanYPos = PACMAN_START_Y;
+        int pacmanDirection = RIGHT;
         int initialBoxReleaseTime = DEATH_TIME;
         virtual void changeDirections() = 0;
         vector <int> possibleMoves();
@@ -50,5 +51,6 @@ class Ghost : public MovingObject, public QGraphicsPixmapItem {
         void makeRegular();
         void makeMove();
         void releaseFromBox();
-        void updatePacmanPos(int pacmanXCoord, int pacmanYCoord);
+        void updatePacmanPos(int pacmanXPos, int pacmanYPos);
+        void updatePacmanDirection(int pacmanDirection);
 };

@@ -78,6 +78,7 @@ void Game::addInky(){
 	connect(pacman, SIGNAL(startBoost()), ghosts[2], SLOT(makeVulnerable()));
 	connect(pacman, SIGNAL(endBoost()), ghosts[2], SLOT(makeRegular()));
 	connect(pacman, SIGNAL(moved(int, int)), ghosts[2], SLOT(updatePacmanPos(int, int)));
+	connect(pacman, SIGNAL(directionChanged(int)), ghosts[2], SLOT(updatePacmanDirection(int)));
 	ghosts[2] -> setNewDirection(RIGHT);
 }
 
@@ -92,6 +93,7 @@ void Game::addPinky(){
 	scene -> addItem(ghosts[3]);
 	connect(pacman, SIGNAL(startBoost()), ghosts[3], SLOT(makeVulnerable()));
 	connect(pacman, SIGNAL(endBoost()), ghosts[3], SLOT(makeRegular()));
+	connect(pacman, SIGNAL(directionChanged(int)), ghosts[3], SLOT(updatePacmanDirection(int)));
 	ghosts[3] -> setNewDirection(DOWN);
 }
 

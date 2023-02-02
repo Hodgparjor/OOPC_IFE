@@ -93,11 +93,13 @@ void Ghost::makeMove(){
 void Ghost::makeVulnerable() {
     this->vulnerable = true;
     setPixmap(QPixmap("./assets/vulnerableghost.png").scaled(CELL_SIZE * 1.1, CELL_SIZE * 1.1));
+    changeDirections();
 }
 
 void Ghost::makeRegular() {
     this->vulnerable = false;
     setPixmap(QPixmap(this->imagePath).scaled(CELL_SIZE * 1.1, CELL_SIZE * 1.1));
+    changeDirections();
 }
 
 bool Ghost::isLive() {
@@ -133,9 +135,13 @@ double Ghost::distance(int targetX, int targetY, int currentX, int currentY){
     return sqrt(pow(targetX - currentX, 2) + pow(targetY - currentY, 2));
 }
 
-void Ghost::updatePacmanPos(int pacmanXCoord, int pacmanYCoord){
-    this->pacmanXCoord = pacmanXCoord;
-    this->pacmanYCoord = pacmanYCoord;
+void Ghost::updatePacmanPos(int pacmanXPos, int pacmanYPos){
+    this->pacmanXPos = pacmanXPos;
+    this->pacmanYPos = pacmanYPos;
+}
+
+void Ghost::updatePacmanDirection(int pacmanDirection) {
+    this->pacmanDirection = pacmanDirection;
 }
 
 void Ghost::startDeathtimer(){

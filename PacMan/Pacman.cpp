@@ -90,6 +90,7 @@ void Pacman::makeMove() {
     this->detectCollisionWithObjects();
     if(isMovePossible(this->nextDirection) && (int) x() % CELL_SIZE == 0 && (int) y()% CELL_SIZE == 0){
         this->currentDirection = this->nextDirection;
+        emit directionChanged(this->currentDirection);
     }
     if(isMovePossible(this->currentDirection)){
         setPixmap(QPixmap(pacmanImg[this->currentDirection]));

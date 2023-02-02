@@ -48,4 +48,5 @@ class Pacman : public MovingObject, public QGraphicsPixmapItem{
         void endBoost();
         void enemyEaten();
         void moved(int xPos, int yPos);
+        void directionChanged(int direction);
 };

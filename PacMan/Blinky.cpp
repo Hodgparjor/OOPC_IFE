@@ -2,10 +2,10 @@
 
 void Blinky::changeDirections() {
     if(isVulnerable()){
-        nextDirection = chooseWorstDirection(pacmanXCoord, pacmanYCoord, xPos, yPos);
+        nextDirection = chooseWorstDirection(pacmanXPos, pacmanYPos, xPos, yPos);
         return;
     }
-    nextDirection = chooseBestDirection(pacmanXCoord, pacmanYCoord, xPos, yPos);
+    nextDirection = chooseBestDirection(pacmanXPos, pacmanYPos, xPos, yPos);
 }
 
 Blinky::Blinky(int xPos, int yPos, QString imagePath, QTimer* pacmanTimer, QGraphicsItem *parent) : Ghost(xPos, yPos, imagePath, pacmanTimer, parent) {
